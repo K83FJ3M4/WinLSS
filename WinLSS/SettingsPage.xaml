@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="WinLSS.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WinLSS"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="Transparent">
+
+    <StackPanel Orientation="Vertical">
+        <StackPanel Background="{ThemeResource ControlFillColorDefaultBrush}" CornerRadius="5" Padding="10" Margin="5" Orientation="Horizontal">
+            <StackPanel Margin="0, 8, 0, 8">
+                <TextBlock Text="Private Missions:">
+                </TextBlock>
+                <TextBlock Text="Display private missions on the map" Style="{ThemeResource CaptionTextBlockStyle}">
+                </TextBlock>
+            </StackPanel>
+            <ToggleSwitch x:Name="PrivateMissionSwitch" HorizontalAlignment="Right" FlowDirection="RightToLeft" Toggled="PrivateMissionsToggled"/>
+        </StackPanel>
+        <StackPanel Background="{ThemeResource ControlFillColorDefaultBrush}" CornerRadius="5" Padding="10" Margin="5, 0, 5, 5" Orientation="Horizontal">
+            <StackPanel Margin="0, 8, 0, 8">
+                <TextBlock Text="Alliance Missions:">
+                </TextBlock>
+                <TextBlock Text="Display alliace missions on the map" Style="{ThemeResource CaptionTextBlockStyle}">
+                </TextBlock>
+            </StackPanel>
+            <ToggleSwitch x:Name="AllianceMissionSwitch" HorizontalAlignment="Right" FlowDirection="RightToLeft" Toggled="AllianceMissionsToggled"/>
+        </StackPanel>
+    </StackPanel>
+</Page>

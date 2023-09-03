@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "WinLSS (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "WinLSS (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
