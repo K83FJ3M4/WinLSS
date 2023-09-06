@@ -31,13 +31,27 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal" Spacing="5" HorizontalAlignment="Right">
-            <Button Click="Close" HorizontalAlignment="Right">
+        <Grid Grid.Row="3" ColumnSpacing="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Border x:Name="ErrorMessage" CornerRadius="4" Padding="10, 0, 10, 0" Background="{ThemeResource SystemControlErrorBackgroundColor}" BorderBrush="{ThemeResource SystemErrorTextColor}" BorderThickness="1" Visibility="Collapsed">
+                <TextBlock x:Name="ErrorMessageText" Text="This is a error" VerticalAlignment="Center" Foreground="{ThemeResource SystemErrorTextColor}"/>
+            </Border>
+            <Border x:Name="SuccessMessage" CornerRadius="4" Padding="10, 0, 10, 0" Background="{ThemeResource SystemFillColorSuccessBackground}" BorderBrush="{ThemeResource SystemFillColorSuccess}" BorderThickness="1" Visibility="Collapsed">
+                <TextBlock x:Name="SuccessMessageText" Text="Successful" VerticalAlignment="Center" Foreground="{ThemeResource SystemFillColorSuccess}"/>
+            </Border>
+
+            <Button Grid.Column="2" Click="Close" HorizontalAlignment="Right">
                 Close
             </Button>
-            <Button HorizontalAlignment="Right" Style="{StaticResource AccentButtonStyle}" Click="Submit">
+
+            <Button Grid.Column="3" HorizontalAlignment="Right" Style="{StaticResource AccentButtonStyle}" Click="Submit">
                 Submit
             </Button>
-        </StackPanel>
+        </Grid>
     </Grid>
 </Page>

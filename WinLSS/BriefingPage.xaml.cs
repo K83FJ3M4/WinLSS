@@ -10,13 +10,7 @@ using Mapsui.Layers;
 using Mapsui.UI.WinUI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -39,7 +33,7 @@ namespace WinLSS
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             Descriptor = (BriefingDescriptor)e.Parameter;
-            Vehicles.ItemsSource = Descriptor.Vehicles;
+            Vehicles.ItemsSource = Descriptor.Vehicles.Values;
         }
 
         void Close(object sender, RoutedEventArgs e)
@@ -62,6 +56,9 @@ namespace WinLSS
 
         private async void Submit(object sender, RoutedEventArgs e)
         {
+            ErrorMessage.Visibility = Visibility.Collapsed;
+            SuccessMessage.Visibility = Visibility.Collapsed;
+
             List<KeyValuePair<string, string>> Keys = new(VehicleIds.Count)
             {
                 new KeyValuePair<string, string>("utf8", "✓"),
@@ -77,15 +74,23 @@ namespace WinLSS
             }
 
             FormUrlEncodedContent content = new(Keys);
-            var url = $"https://www.leitstellenspiel.de/missions/{Descriptor.Mission.Id}/alarm";
-            var response = await Descriptor.HttpClient.PostAsync(url, content);
-            Debug.WriteLine($"{response.IsSuccessStatusCode}");
+            var response = await Descriptor.HttpClient.PostAsync($"missions/{Descriptor.Mission.Id}/alarm", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                SuccessMessageText.Text = $"Successfully alarmed {VehicleIds.Count} vehicles";
+                SuccessMessage.Visibility = Visibility.Visible;
+            } else
+            {
+                ErrorMessageText.Text = $"Failed to alarm vehicles: {response.ReasonPhrase}";
+                ErrorMessage.Visibility = Visibility.Visible;
+            }
         }
     }
 
     public class BriefingDescriptor
     {
-        public ObservableCollection<Vehicle> Vehicles { get; set; }
+        public Dictionary<uint, Vehicle> Vehicles { get; set; }
         public HttpClient HttpClient { get; set; }
         public Mission Mission { get; set; }
         public Action Close { get; set; }

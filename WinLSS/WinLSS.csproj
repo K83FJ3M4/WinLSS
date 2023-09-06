@@ -14,10 +14,10 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="BriefingPage.xaml" />
-    <None Remove="MainPage.xaml" />
     <None Remove="MapPage.xaml" />
     <None Remove="MissionListPage.xaml" />
     <None Remove="SettingsPage.xaml" />
+    <None Remove="SidebarPage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,7 +46,7 @@
     <ProjectCapability Include="Msix" />
   </ItemGroup>
   <ItemGroup>
-    <Page Update="MainPage.xaml">
+    <Page Update="SidebarPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

@@ -13,19 +13,31 @@
     </Window.SystemBackdrop>
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="28"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
-        <Border x:Name="AppTitleBar" Grid.Column="0" Grid.ColumnSpan="3" Padding="10,0,0,0" Background="Transparent">
+
+        <Border x:Name="AppTitleBar" Grid.Column="0" Grid.ColumnSpan="2" Padding="10,0,0,0" Background="Transparent">
             <TextBlock Text="WinLSS" VerticalAlignment="Center" HorizontalAlignment="Left"/>
         </Border>
 
-        <Frame x:Name="Content" Grid.Row="1">
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
-                Loading
-            </TextBlock>
+        <Frame x:Name="SidebarContent" Grid.Row="1">
+            <ProgressRing VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Frame>
+
+        <Frame x:Name="MainContent" Grid.Column="1" Grid.Row="1" Background="{ThemeResource LayerFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1, 1, 0, 0" CornerRadius="8, 0, 0, 0">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Loading...</TextBlock>
+        </Frame>
+
+        <TeachingTip x:Name="MissionTip" ActionButtonContent="Inspect" ActionButtonClick="InspectMission" Background="{ThemeResource AcrylicBackgroundFillColorBaseBrush}">
+            <TeachingTip.IconSource>
+                <SymbolIconSource Symbol="MapPin" />
+            </TeachingTip.IconSource>
+        </TeachingTip>
     </Grid>
 </Window>
